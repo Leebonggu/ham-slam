@@ -1,0 +1,75 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='./fx.js'></script>
+  <title>Document</title>
+</head>
+<body>
+  <div id='cart'>
+
+  </div>
+  <script>
+    const products = [
+      {name: '반팔티', price: 15000, quantity: 1, isSelected: true },
+      {name: '긴팔티', price: 20000, quantity: 2, isSelected: false },
+      {name: '핸드폰케이스', price: 15000, quantity: 3, isSelected: true },
+      {name: '후드티', price: 30000, quantity: 4, isSelected: false },
+      {name: '바지', price: 25000, quantity: 5, isSelected: true },
+    ];
+
+    const add = (a, b) => a + b;
+    
+    const sum = curry(
+      (f, iter) => go(
+        iter,
+        map(f),
+        reduce(add),
+      ),
+    );
+    
+    // 총수량
+    const totalQuantity = sum(p => p.quantity);
+    const totalPrice = sum(p => p.price * p.quantity);
+
+    document.querySelector('#cart').innerHTML = `
+      <table>
+        <tr>
+          <th>상품이름</th>  
+          <th>상품이름</th>  
+          <th>상품가격</th>  
+          <th>상품수량</th>  
+          <th>총 가격</th>  
+        </tr>
+        ${
+          go(
+            products,
+            sum(p => (
+              `
+                <tr>
+                  <td><input type="checkbox" ${p.isSelected ? 'checked': ''}/></td>  
+                  <td>${p.name}</td>  
+                  <td>${p.price}</td>  
+                  <td><input type="number" value="${p.quantity}"/></td>  
+                  <td>${p.price * p.quantity}</td>  
+                </tr>
+              `
+            )),
+          )
+        }
+        <tr>
+          <td colspan="2">합계</td>  
+          <td>${totalQuantity(
+            filter(p => p.isSelected, products)
+          )}</td>  
+          <td>${totalPrice(
+            filter(p => p.isSelected, products)
+          )}</td>  
+        </tr>
+      </table>
+    `;
+
+  </script>
+</body>
+</html>
