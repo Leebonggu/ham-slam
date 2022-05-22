@@ -2,17 +2,21 @@
 /**
  * 이터러블/이터레이터 프로토콜
  * 이터러블: 이터레이터를 리턴하는 [Symbol.iterator]()가진 값
- * 이터레이터: {value, done} 객체를 리턴하는 next()를 가진 값
- * 이터러블/이터레이터 프로토컬: 이터러블을 for...of, 전개연산자 등과 함꼐 동작하도록한 규약
+ * 이터레이터: {value, done } 객체를 리턴하는 next()를 가진 값
+ * 이터러블/이터레이터 프로토콜: 이터러블을 for...of, 전개연산자 등과 함꼐 동작하도록한 규약
  */
 
 
 // Array 통해 알아보기
+/**
+ * 
+ * Symbol.iterator
+ */
 
 {
   console.log('Array');
   const arr = [1, 2, 3, 4, 5];
-  const tier = arr[Symbol.iterator]()
+  const tier = arr[Symbol.iterator]();
   console.log(tier.next());
   for (const a  of tier) console.log(a);
 }
@@ -31,7 +35,6 @@
 
 /**
  * 사용자 정의 이터러블
- * 
  */
 
 {
@@ -49,8 +52,6 @@
     }
   }
   const iterator = iterable[Symbol.iterator]();
-  console.log(iterator.next());
-  console.log(iterator.next());
 
   for (const a  of iterator) console.log(a);
 }

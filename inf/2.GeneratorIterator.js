@@ -4,17 +4,18 @@
  * 이터레이터를 리턴하는 함수
  * return값 없이 순회
  * generator를 통해 값을 순회할 수 있게 만들 수 있다
+ * generator => wellformed iterator를 반환
  * 어떤 값도 순회할 수 있는 값으로 조작가능하다
  */
 
 {
-  function* get() {
+  function* gen() {
     yield 1;
     yield 2;
     yield 3;
     return 100;
   }
-  const iter = get();
+  const iter = gen();
   iter[Symbol.iterator]().next()
   console.log(iter.next())
   console.log(iter.next())
@@ -37,7 +38,7 @@
 
   function* odds(l) {
     for( const a of limit(l, infinity(1))) {
-        if (a % 2) yield a;
+      if (a % 2) yield a;
     }
   }
 
@@ -53,15 +54,5 @@
   console.log(iter2.next());
   
   let iter3 = infinity();
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
-  // console.log(iter3.next())
+  console.log(...odds(10));
 }

@@ -1,0 +1,12 @@
+{
+  "name": "inf",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "## 기본개념 ### 평가 - 코드가 계산되어 값을 만드는 것",
+  "main": "1.ArraySetMap.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
